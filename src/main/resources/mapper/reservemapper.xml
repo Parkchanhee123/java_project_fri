@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kio.app.repository.ResRepository">
+
+    <select id="select" resultType="org.kio.app.dto.ResDto">
+        SELECT 
+            res_id AS resId,
+            doc_id AS docId,
+            user_id AS userId,
+            res_date AS resDate
+        FROM Res
+    </select>
+
+    <select id="selectOne" parameterType="Integer" resultType="org.kio.app.dto.ResDto">
+        SELECT 
+            res_id AS resId,
+            doc_id AS docId,
+            user_id AS userId,
+            res_date AS resDate
+        FROM Res
+        WHERE res_id = #{resId}
+    </select>
+
+    <insert id="insert" parameterType="org.kio.app.dto.ResDto" useGeneratedKeys="true" keyProperty="resId">
+        INSERT INTO Res (doc_id, user_id, res_date)
+        VALUES (#{docId}, #{userId}, #{resDate})
+    </insert>
+
+    <update id="update" parameterType="org.kio.app.dto.ResDto">
+        UPDATE Res
+        SET
+            doc_id = #{docId},
+            user_id = #{userId},
+            res_date = #{resDate}
+        WHERE res_id = #{resId}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM Res WHERE res_id = #{resId}
+    </delete>
+
+</mapper>

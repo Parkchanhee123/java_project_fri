@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kio.app.repository.HistoryRepository">
+
+    <select id="select" resultType="org.kio.app.dto.HistoryDto">
+        SELECT 
+            his_id       AS hisId,
+            doc_id       AS docId,
+            user_id      AS userId,
+            pay          AS pay,
+            cos_date     AS cosDate,
+            prescription AS prescription
+        FROM history
+    </select>
+
+    <select id="selectOne" parameterType="Integer" resultType="org.kio.app.dto.HistoryDto">
+        SELECT 
+            his_id       AS hisId,
+            doc_id       AS docId,
+            user_id      AS userId,
+            pay          AS pay,
+            cos_date     AS cosDate,
+            prescription AS prescription
+        FROM history
+        WHERE his_id = #{hisId}
+    </select>
+
+    <insert id="insert" parameterType="org.kio.app.dto.HistoryDto" 
+            useGeneratedKeys="true" keyProperty="hisId">
+        INSERT INTO history (doc_id, user_id, pay, cos_date, prescription)
+        VALUES (#{docId}, #{userId}, #{pay}, #{cosDate}, #{prescription})
+    </insert>
+
+    <update id="update" parameterType="org.kio.app.dto.HistoryDto">
+        UPDATE history
+        SET
+            doc_id = #{docId},
+            user_id = #{userId},
+            pay = #{pay},
+            cos_date = #{cosDate},
+            prescription = #{prescription}
+        WHERE his_id = #{hisId}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM history WHERE his_id = #{hisId}
+    </delete>
+
+    <select id="selectById" parameterType="Integer" resultType="org.kio.app.dto.HistoryDto">
+        SELECT 
+            his_id       AS hisId,
+            doc_id       AS docId,
+            user_id      AS userId,
+            pay          AS pay,
+            cos_date     AS cosDate,
+            prescription AS prescription
+        FROM history
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

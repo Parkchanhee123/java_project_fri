@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kio.app.repository.DocRepository">
+
+    <select id="select" resultType="org.kio.app.dto.DocDto">
+        SELECT 
+            doc_id AS docId, 
+            doc_name AS docName 
+        FROM doc
+    </select>
+
+    <select id="selectOne" parameterType="Integer" resultType="org.kio.app.dto.DocDto">
+        SELECT 
+            doc_id AS docId, 
+            doc_name AS docName 
+        FROM doc 
+        WHERE doc_id = #{docId}
+    </select>
+
+    <insert id="insert" parameterType="org.kio.app.dto.DocDto">
+        INSERT INTO doc (doc_name)
+        VALUES (#{docName})
+    </insert>
+
+    <update id="update" parameterType="org.kio.app.dto.DocDto">
+        UPDATE doc
+        SET
+            doc_name = #{docName}
+        WHERE doc_id = #{docId}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM doc WHERE doc_id = #{docId}
+    </delete>
+
+</mapper>

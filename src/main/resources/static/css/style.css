@@ -1,0 +1,37 @@
+.mainButtons{
+  position:absolute;
+  display:flex;
+  top:35%;
+  left:0;
+  width:100%;
+  gap:16px;
+  transform:translateY(-100%);
+}
+.mainButtons>*{flex-grow:1;}
+
+.button{
+  position:relative;
+  padding: 14px;
+  font-size: 2rem;
+  background:#ffcc7a;
+  border:none;
+  border-radius:8px;
+  box-shadow:0 1px 2px 2px #5553;
+  transition: .2s;
+}
+.button:active{
+  box-shadow:0 0 0px 0px #5550;
+  filter: brightness(80%);
+}
+
+#ReserveList{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  width:80%;
+  height: 50%;
+  background:#fff;
+  border:1px solid #bbb;
+  border-radius:8px;
+  transform:translateX(-50%);
+}

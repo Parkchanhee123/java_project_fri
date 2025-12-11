@@ -24,7 +24,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String main(Model model) {
-        log.info("Started Main");
+        // log.info("Started Main");
         model.addAttribute("serverurl", serverurl);
         return "index";
     }
