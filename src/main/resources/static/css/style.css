@@ -1,37 +1,142 @@
-.mainButtons{
-  position:absolute;
-  display:flex;
-  top:35%;
-  left:0;
-  width:100%;
-  gap:16px;
-  transform:translateY(-100%);
-}
-.mainButtons>*{flex-grow:1;}
+/* 1. 폰트 및 기본 설정 (추가) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-.button{
-  position:relative;
-  padding: 14px;
-  font-size: 2rem;
-  background:#ffcc7a;
-  border:none;
-  border-radius:8px;
-  box-shadow:0 1px 2px 2px #5553;
-  transition: .2s;
-}
-.button:active{
-  box-shadow:0 0 0px 0px #5550;
-  filter: brightness(80%);
+:root {
+    --primary-blue: #4A90E2;    /* 신뢰감을 주는 파란색 */
+    --primary-orange: #F5A623;  /* 따뜻한 주황색 */
+    --bg-gray: #F5F7FA;         /* 눈이 편안한 배경색 */
+    --text-dark: #333333;
+    --shadow-soft: 0 10px 20px rgba(0,0,0,0.08); /* 부드러운 그림자 */
 }
 
-#ReserveList{
-  position:absolute;
-  bottom:8px;
-  left:50%;
-  width:80%;
-  height: 50%;
-  background:#fff;
-  border:1px solid #bbb;
-  border-radius:8px;
-  transform:translateX(-50%);
+body {
+    background-color: var(--bg-gray);
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+}
+
+/* 2. 헤더 스타일 (추가) */
+.kiosk-header {
+    background-color: #1a2b4b; /* 짙은 네이비 */
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: 80px;
+    box-sizing: border-box;
+}
+.kiosk-header .logo-area { font-size: 1.5rem; font-weight: bold; }
+.kiosk-header .time-area { font-size: 1.2rem; font-weight: 300; }
+
+/* 3. 메인 컨테이너 (추가 - 전체 레이아웃 잡기) */
+.main-container {
+    padding: 30px;
+    height: calc(100vh - 80px); /* 헤더 제외한 높이 */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* 4. 버튼 영역 (.mainButtons 수정)
+   - 기존 absolute 위치 제거하고 Flex/Grid로 변경하여 안정성 확보
+*/
+.mainButtons {
+    /* 기존 position: absolute; 제거 권장 */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* 버튼 사이 간격 넓힘 */
+    width: 100%;
+    margin-bottom: 30px;
+    transform: none; /* 기존 transform 제거 */
+    top: auto;
+    left: auto;
+}
+
+/* 5. 버튼 스타일 (.button 수정 + .action-card 통합)
+   - 훨씬 크고 예쁜 카드 형태로 변경
+*/
+.button, .action-card {
+    position: relative;
+    border: none;
+    border-radius: 20px; /* 둥근 모서리 */
+    color: white;
+    padding: 30px 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-soft);
+
+    /* Flex로 내용 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* 크기 확보 */
+    width: 100%;
+    height: 200px; /* 버튼 높이 고정 */
+}
+
+/* 버튼 클릭 효과 */
+.button:active, .action-card:active {
+    transform: scale(0.98);
+    filter: brightness(90%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 예약 버튼 전용 색상 (ID 또는 클래스로 구분) */
+#Reserve, .btn-reserve {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* 수납 버튼 전용 색상 */
+#payment, .btn-payment {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+/* 6. 리스트/아이프레임 영역 (#ReserveList 수정)
+   - 붕 떠있는 느낌을 없애고 깔끔한 패널로 변경
+*/
+#ReserveList {
+    /* 기존 absolute 제거하고 Flex 아이템으로 변경 */
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+    width: 100%;
+    height: 100%; /* 부모 남은 공간 채우기 */
+    flex-grow: 1; /* 남은 공간 모두 차지 */
+
+    background: #fff;
+    border: none; /* 테두리 없애고 그림자로 대체 */
+    border-radius: 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05); /* 위쪽으로 살짝 그림자 */
+}
+
+/* 7. 현황판 감싸는 박스 스타일 (추가) */
+.status-section {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden; /* 내부 아이프레임 넘침 방지 */
+}
+
+.status-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 5px solid var(--primary-blue);
 }

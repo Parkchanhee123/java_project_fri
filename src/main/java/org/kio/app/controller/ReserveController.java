@@ -36,6 +36,7 @@ public class ReserveController {
     private final UsersService usersService;
     private final DocService docService;
     private final ResService resService;
+
     @GetMapping("")
     public String Reserve(@RequestParam(value="phoneNumber",required=false) String phoneNumber, Model model) throws Exception {
         List<DocDto> list = docService.get();
